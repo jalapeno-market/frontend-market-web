@@ -1,0 +1,38 @@
+@use "../../styles/color.scss" as color;
+
+.box {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  margin-bottom: 15px;
+}
+
+.profile {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.right {
+  display: grid;
+  padding: auto 0;
+}
+
+.up {
+  display: flex;
+  width: 100%;
+}
+
+.nickname {
+  margin: auto 5px;
+  font-weight: 900;
+}
+
+.last-update {
+  margin: auto 0;
+  font-size: small;
+  color: rgb(115, 115, 115);
+}
+
+.last-message {
+  margin: 5px;
+}
