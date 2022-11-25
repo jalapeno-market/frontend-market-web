@@ -1,0 +1,30 @@
+@use "../../styles/color.scss" as color;
+
+.checkbox {
+  display: none;
+}
+
+.label {
+  margin-right: 5px;
+}
+
+.my-checkbox {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.checkbox + .label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid color.$gray;
+}
+
+.checkbox:checked + .label {
+  background-image: url("../../public/image/checkbox/checkboxIcon.jpg");
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+}
