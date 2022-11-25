@@ -1,5 +1,5 @@
-import React, { Children, PropsWithChildren } from "react";
-import Navigation from "./Navigation";
+import React, { PropsWithChildren } from "react";
+import BottomBar from "./BottomBar";
 import Header from "./Header";
 
 export default function Layout({ children }: PropsWithChildren) {
@@ -7,7 +7,7 @@ export default function Layout({ children }: PropsWithChildren) {
     <React.Fragment>
       <Header />
       {children}
-      <Navigation />
+      <BottomBar />
     </React.Fragment>
   );
 }
