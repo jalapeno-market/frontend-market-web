@@ -1,18 +1,5 @@
 {
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "options": {
-        "semi": true
-      }
-    },
-    {
-      "files": ["*.json"],
-      "options": {
-        "semi": false,
-        "singleQuote": false
-      }
-    }
-  ]
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all"
 }
-
