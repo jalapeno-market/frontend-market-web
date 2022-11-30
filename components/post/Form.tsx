@@ -7,6 +7,7 @@ import Image from "next/image";
 const Form = () => {
   const [isCheckedSharingBox, setIsCheckedSharingBox] = useState(false);
   const sharingCheckbox = useRef<HTMLInputElement>(null);
+  const priceInputRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -15,8 +16,14 @@ const Form = () => {
   const sharingCheckboxClickHandler = () => {
     if (sharingCheckbox.current?.checked) {
       setIsCheckedSharingBox(true);
+      if (priceInputRef.current) {
+        priceInputRef.current.value = "0";
+      }
     } else {
       setIsCheckedSharingBox(false);
+      if (priceInputRef.current) {
+        priceInputRef.current.value = "";
+      }
     }
   };
 
@@ -38,14 +45,17 @@ const Form = () => {
         <div>&gt;</div>
       </div>
       <div className={styles["price"]}>
-        {!isCheckedSharingBox && (
-          <input
-            type="number"
-            placeholder="￦ 가격(선택사항)"
-            className={styles["no-border-input"]}
-          ></input>
+        {(isCheckedSharingBox || priceInputRef.current?.value.length !== 0) && (
+          <div>￦</div>
         )}
-        {isCheckedSharingBox && <div>￦ 0</div>}
+        <input
+          type="number"
+          placeholder="￦ 가격(선택사항)"
+          className={styles["no-border-input"]}
+          readOnly={isCheckedSharingBox}
+          defaultValue={isCheckedSharingBox ? "0" : ""}
+          ref={priceInputRef}
+        ></input>
         <Checkbox
           id="sharing"
           label="나눔"
