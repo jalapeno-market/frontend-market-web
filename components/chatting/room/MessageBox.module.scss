@@ -1,0 +1,33 @@
+@use "../../../styles/color.scss" as color;
+
+.send-box {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}
+
+.send-box > div {
+  display: inline-block;
+  padding: 10px;
+
+  max-width: 70%;
+  word-wrap: break-word;
+  background-color: color.$dark-green;
+  color: white;
+  border-radius: 20px;
+}
+
+.receive-box {
+  display: flex;
+  margin-bottom: 5px;
+}
+.receive-box > div {
+  display: inline-block;
+  padding: 10px;
+
+  max-width: 70%;
+  word-wrap: break-word;
+  background-color: color.$gray;
+  color: black;
+  border-radius: 20px;
+}
