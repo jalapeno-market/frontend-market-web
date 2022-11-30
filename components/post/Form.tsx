@@ -2,10 +2,12 @@ import React, { useRef, useState } from "react";
 import styles from "./Form.module.scss";
 import Checkbox from "../common/Checkbox";
 import PicIcon from "../../public/image/postForm/iconmonstr-picture-thin.svg";
+import Image from "next/image";
 
 const Form = () => {
   const [isCheckedSharingBox, setIsCheckedSharingBox] = useState(false);
   const sharingCheckbox = useRef<HTMLInputElement>(null);
+  const priceInputRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -14,14 +16,25 @@ const Form = () => {
   const sharingCheckboxClickHandler = () => {
     if (sharingCheckbox.current?.checked) {
       setIsCheckedSharingBox(true);
+      if (priceInputRef.current) {
+        priceInputRef.current.value = "0";
+      }
     } else {
       setIsCheckedSharingBox(false);
+      if (priceInputRef.current) {
+        priceInputRef.current.value = "";
+      }
     }
   };
 
   return (
     <form onSubmit={submitHandler} className={styles["form"]}>
-      <div className={styles["pic-container"]}>사진 업로드 부분</div>
+      <div className={styles["pic-container"]}>
+        <div className={styles["pic-count-container"]}>
+          <Image src={PicIcon} width="40" height="40" alt="upload image" />
+          <div>0/10</div>
+        </div>
+      </div>
       <input
         type="text"
         placeholder="글 제목"
@@ -32,14 +45,17 @@ const Form = () => {
         <div>&gt;</div>
       </div>
       <div className={styles["price"]}>
-        {!isCheckedSharingBox && (
-          <input
-            type="number"
-            placeholder="￦ 가격(선택사항)"
-            className={styles["no-border-input"]}
-          ></input>
-        )}
-        {isCheckedSharingBox && <div>￦ 0</div>}
+        {(isCheckedSharingBox ||
+          (priceInputRef.current?.value.length !== 0 &&
+            priceInputRef.current !== null)) && <div>￦</div>}
+        <input
+          type="number"
+          placeholder="￦ 가격(선택사항)"
+          className={styles["no-border-input"]}
+          readOnly={isCheckedSharingBox}
+          defaultValue={isCheckedSharingBox ? "0" : ""}
+          ref={priceInputRef}
+        ></input>
         <Checkbox
           id="sharing"
           label="나눔"

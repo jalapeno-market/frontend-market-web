@@ -12,8 +12,13 @@
 
 .pic-container {
   display: flex;
-  flex-direction: column;
   width: 100%;
+}
+
+.pic-count-container {
+  padding: 20px 30px;
+  border: 1px solid color.$gray;
+  text-align: center;
 }
 
 .no-border-input {
