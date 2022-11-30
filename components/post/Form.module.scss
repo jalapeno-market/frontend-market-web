@@ -1,0 +1,45 @@
+@use '../../styles/color.scss' as color;
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form input::placeholder,
+.form textarea::placeholder {
+  color: color.$gray;
+}
+
+.pic-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.no-border-input {
+  width: 100%;
+  border: none;
+}
+
+.category {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price > .no-border-input {
+  width: 80%;
+}
+
+.price > div {
+  margin: auto 0;
+}
+
+.form > * {
+  border-bottom: 1px solid color.$gray;
+  padding: 13px 0;
+}

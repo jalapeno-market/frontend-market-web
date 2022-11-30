@@ -6,7 +6,7 @@ import '../styles/global.scss';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Layout>
-      <Component {...pageProps} />
+      <Component />
     </Layout>
   );
 }
