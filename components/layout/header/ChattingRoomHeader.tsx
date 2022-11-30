@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./ChattingRoomHeader.module.scss";
-import { useRouter } from "next/router";
+import React from 'react';
+import styles from './ChattingRoomHeader.module.scss';
+import { useRouter } from 'next/router';
 
 type ChattingRoomHeaderProps = {
   nickname: string;
@@ -13,20 +13,20 @@ const ChattingRoomHeader = ({
 }: ChattingRoomHeaderProps) => {
   const router = useRouter();
   const clickBackButtonHandler = () => {
-    router.push("/chatting");
+    router.push('/chatting');
   };
   return (
     <header className={styles.box}>
-      <div className={styles["back-btn-space"]}></div>
-      <div className={styles["title"]}>
-        <button className={styles["back-btn"]} onClick={clickBackButtonHandler}>
+      <div className={styles['back-btn-space']}></div>
+      <div className={styles['title']}>
+        <button className={styles['back-btn']} onClick={clickBackButtonHandler}>
           &lt;
         </button>
         {nickname}
-        <button className={styles["menu-btn"]}>menu</button>
+        <button className={styles['menu-btn']}>menu</button>
       </div>
 
-      <div className={styles["menu-btn-space"]}></div>
+      <div className={styles['menu-btn-space']}></div>
     </header>
   );
 };

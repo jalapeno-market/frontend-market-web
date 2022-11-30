@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./Checkbox.module.scss";
+import React from 'react';
+import styles from './Checkbox.module.scss';
 
 type checkboxProps = {
   id: string;
@@ -19,7 +19,7 @@ const Checkbox = ({ id, label, inputRef, onClick }: checkboxProps) => {
         onClick={onClick}
       ></input>
       <label htmlFor={id} className={styles.label}>
-        <div className={styles["my-checkbox"]}></div>
+        <div className={styles['my-checkbox']}></div>
       </label>
       <span>{label}</span>
     </div>

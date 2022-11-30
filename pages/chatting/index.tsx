@@ -1,4 +1,4 @@
-import ChattingList from "../../components/chatting/ChattingList";
+import ChattingList from '../../components/chatting/ChattingList';
 
 const Chatting = () => {
   return <ChattingList />;

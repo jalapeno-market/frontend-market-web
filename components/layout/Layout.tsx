@@ -1,6 +1,6 @@
-import React, { PropsWithChildren } from "react";
-import BottomBar from "./BottomBar";
-import Header from "./Header";
+import React, { PropsWithChildren } from 'react';
+import BottomBar from './BottomBar';
+import Header from './Header';
 
 export default function Layout({ children }: PropsWithChildren) {
   return (

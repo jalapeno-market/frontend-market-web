@@ -1,6 +1,6 @@
-import Router from "next/router";
-import React from "react";
-import styles from "./ChattingListItem.module.scss";
+import Router from 'next/router';
+import React from 'react';
+import styles from './ChattingListItem.module.scss';
 
 type ChattingListItemProps = {
   id: number;
@@ -31,9 +31,9 @@ const ChattingListItem = ({
       <div className={styles.right}>
         <div className={styles.up}>
           <div className={styles.nickname}>{nickname}</div>
-          <div className={styles["last-update"]}>{lastUpdate}</div>
+          <div className={styles['last-update']}>{lastUpdate}</div>
         </div>
-        <div className={styles["last-message"]}>{lastMessage}</div>
+        <div className={styles['last-message']}>{lastMessage}</div>
       </div>
     </div>
   );

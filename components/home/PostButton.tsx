@@ -1,13 +1,13 @@
-import React from "react";
-import plusIcon from "../../public/image/plus.svg";
-import Image from "next/image";
-import styles from "./PostButton.module.scss";
-import { useRouter } from "next/router";
+import React from 'react';
+import plusIcon from '../../public/image/plus.svg';
+import Image from 'next/image';
+import styles from './PostButton.module.scss';
+import { useRouter } from 'next/router';
 
 const PostButton = () => {
   const router = useRouter();
   const clickHandler = () => {
-    router.push("/new-post");
+    router.push('/new-post');
   };
 
   return (

@@ -1,4 +1,4 @@
-@use "../../styles/color.scss" as color;
+@use '../../styles/color.scss' as color;
 
 .checkbox {
   display: none;
@@ -23,7 +23,7 @@
 }
 
 .checkbox:checked + .label {
-  background-image: url("../../public/image/checkbox/checkboxIcon.jpg");
+  background-image: url('../../public/image/checkbox/checkboxIcon.jpg');
   background-size: cover;
   background-color: transparent;
   border: none;

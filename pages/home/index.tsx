@@ -1,5 +1,5 @@
-import React from "react";
-import PostButton from "../../components/home/PostButton";
+import React from 'react';
+import PostButton from '../../components/home/PostButton';
 
 export default function Home() {
   return (
