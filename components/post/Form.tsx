@@ -45,9 +45,9 @@ const Form = () => {
         <div>&gt;</div>
       </div>
       <div className={styles["price"]}>
-        {(isCheckedSharingBox || priceInputRef.current?.value.length !== 0) && (
-          <div>￦</div>
-        )}
+        {(isCheckedSharingBox ||
+          (priceInputRef.current?.value.length !== 0 &&
+            priceInputRef.current !== null)) && <div>￦</div>}
         <input
           type="number"
           placeholder="￦ 가격(선택사항)"
