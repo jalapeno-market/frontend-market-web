@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import styles from "./Form.module.scss";
 import Checkbox from "../common/Checkbox";
 import PicIcon from "../../public/image/postForm/iconmonstr-picture-thin.svg";
+import Image from "next/image";
 
 const Form = () => {
   const [isCheckedSharingBox, setIsCheckedSharingBox] = useState(false);
@@ -21,7 +22,12 @@ const Form = () => {
 
   return (
     <form onSubmit={submitHandler} className={styles["form"]}>
-      <div className={styles["pic-container"]}>사진 업로드 부분</div>
+      <div className={styles["pic-container"]}>
+        <div className={styles["pic-count-container"]}>
+          <Image src={PicIcon} width="40" height="40" alt="upload image" />
+          <div>0/10</div>
+        </div>
+      </div>
       <input
         type="text"
         placeholder="글 제목"
