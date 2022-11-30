@@ -1,4 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import Loading from "../components/common/Loading";
 export default function Home() {
-  return <div>당근로딩화면 3초만 띄우고 redirect..</div>;
+  const router = useRouter();
+
+  useEffect(() => {
+    setTimeout(function () {
+      router.push("/home");
+    }, 2000);
+  });
+
+  return (
+    <div>
+      <Loading />
+    </div>
+  );
 }
