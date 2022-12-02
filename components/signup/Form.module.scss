@@ -1,0 +1,29 @@
+@use "../../styles/color.scss" as color;
+
+.form {
+  width: 100%;
+  max-width: 500px;
+
+  margin: auto;
+  padding: 20px;
+  border: 1px solid color.$gray;
+  text-align: center;
+}
+
+.form > div {
+  margin: 30px;
+}
+
+.form input {
+  width: 100%;
+  height: 30px;
+
+  border: 1px solid color.$gray;
+  border-radius: 10px;
+}
+
+.signup-link {
+  display: block;
+  padding: 10px;
+  font-size: 12px;
+}
