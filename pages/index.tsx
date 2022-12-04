@@ -1,18 +1,6 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
-import Loading from "../components/common/Loading";
+import React from "react";
+import Form from "../components/login/Form";
+
 export default function Home() {
-  const router = useRouter();
-
-  useEffect(() => {
-    setTimeout(function () {
-      router.push("/home");
-    }, 2000);
-  });
-
-  return (
-    <div>
-      <Loading />
-    </div>
-  );
+  return <Form />;
 }

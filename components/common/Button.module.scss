@@ -1,0 +1,15 @@
+@use "../../styles/color.scss" as color;
+
+.btn {
+  height: 35px;
+  width: 150px;
+
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: color.$dark-green;
+}
+
+.btn:active {
+  filter: brightness(70%);
+}
