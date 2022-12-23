@@ -2,29 +2,36 @@ import React, { useRef } from "react";
 import Button from "../common/Button";
 import styles from "./Form.module.scss";
 import Link from "next/link";
+import { fetchPost } from "../../api/api";
+import { useRouter } from "next/router";
 
 const Form = () => {
+  const router = useRouter();
   const idRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = (e: React.FormEvent) => {
-    console.log("submit");
     e.preventDefault();
-    fetch(`${process.env.HOST}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    try {
+      fetchPost(`${process.env.SERVER}/login`, {
         loginId: idRef.current?.value,
-        password: idRef.current?.value,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
+        password: passwordRef.current?.value,
+      }).then((res) => {
+        if (res.data) {
+          router.push("/home");
+          return;
+        }
+        if (res.code === "BAD") {
+          alert(res.message);
+          return;
+        }
+        alert("로그인 실패.. 나중에 다시 시도해보세요.");
       });
+    } catch (error) {
+      console.log("Login Error");
+    }
   };
+
   return (
     <form onSubmit={submitHandler} className={styles.form}>
       <div>
