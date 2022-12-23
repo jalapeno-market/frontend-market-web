@@ -2,31 +2,40 @@ import React, { useRef } from "react";
 import Button from "../common/Button";
 import styles from "./Form.module.scss";
 import Link from "next/link";
+import { fetchPost } from "../../api/api";
+import { useRouter } from "next/router";
 
 const Form = () => {
+  const router = useRouter();
   const nicknameRef = useRef<HTMLInputElement>(null);
   const idRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = (e: React.FormEvent) => {
-    console.log(process.env.HOST);
     e.preventDefault();
-    fetch(`${process.env.HOST}/members/join`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: "test_id",
-        password: "test_password",
-        nickname: "test_nickname",
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
+
+    try {
+      fetchPost(`${process.env.SERVER}/members/join`, {
+        userId: idRef.current?.value,
+        password: passwordRef.current?.value,
+        nickname: nicknameRef.current?.value,
+      }).then((res) => {
+        if (res.data) {
+          alert("회원가입 성공! 로그인페이지로 이동합니다.");
+          router.push("/");
+          return;
+        }
+        if (res.code === "BAD") {
+          alert(res.message);
+          return;
+        }
+        alert("회원가입 실패.. 나중에 다시 시도해보세요.");
       });
+    } catch (error) {
+      console.log("Signup Error");
+    }
   };
+
   return (
     <form onSubmit={submitHandler} className={styles.form}>
       <div>
