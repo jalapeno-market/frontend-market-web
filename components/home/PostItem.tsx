@@ -12,10 +12,17 @@ type PostItemProps = {
   status: string;
 };
 
-const PostItem = ({ title, img, createdAt, price, status }: PostItemProps) => {
+const PostItem = ({
+  id,
+  title,
+  img,
+  createdAt,
+  price,
+  status,
+}: PostItemProps) => {
   const router = useRouter();
   const clickHandler = () => {
-    router.push(`/home/${router.query.post}`);
+    router.push(`/home/${id}`);
   };
   return (
     <div className={styles.box} onClick={clickHandler}>
