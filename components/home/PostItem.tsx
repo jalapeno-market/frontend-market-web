@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./PostItem.module.scss";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 type PostItemProps = {
   id: string;
@@ -12,8 +13,12 @@ type PostItemProps = {
 };
 
 const PostItem = ({ title, img, createdAt, price, status }: PostItemProps) => {
+  const router = useRouter();
+  const clickHandler = () => {
+    router.push(`/home/${router.query.post}`);
+  };
   return (
-    <div className={styles.box}>
+    <div className={styles.box} onClick={clickHandler}>
       <div className={styles.left}>
         <Image
           className={styles.image}
