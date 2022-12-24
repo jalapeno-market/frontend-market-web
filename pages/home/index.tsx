@@ -1,6 +1,7 @@
 import React from "react";
 import PostButton from "../../components/home/PostButton";
 import PostItem from "../../components/home/PostItem";
+import Container from "../../components/common/Container";
 
 export default function Home() {
   const posts = [
@@ -33,9 +34,9 @@ export default function Home() {
   ));
 
   return (
-    <React.Fragment>
+    <Container>
       <div>{posts}</div>
       <PostButton />
-    </React.Fragment>
+    </Container>
   );
 }
