@@ -1,0 +1,45 @@
+@use "../../styles/color.scss" as color;
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+.user-box {
+  display: flex;
+  border-bottom: 1px solid color.$gray;
+  padding: 20px;
+}
+.user-profile {
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+.user-nickname {
+  display: flex;
+  padding: 0 10px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+}
+.content-box {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.content-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+.content-updatedAt {
+  padding: 5px 0;
+  font-size: 14px;
+  color: gray;
+}
+.content-content {
+  padding: 20px 0;
+}
