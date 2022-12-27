@@ -3,13 +3,21 @@
 * {
   margin: 0;
   padding: 0;
+}
+*,
+:after,
+:before {
   box-sizing: border-box;
 }
+*:focus {
+  box-shadow: 0 0 0;
+  outline: auto 0 -webkit-focus-ring-color;
+}
 
+html,
 body {
+  height: 100%;
   font-family: "Nanum Gothic", sans-serif;
-  // padding: 15px;
-  // margin-top: 65px;
 }
 
 a {
