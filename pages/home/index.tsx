@@ -1,7 +1,8 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import PostButton from "../../components/home/PostButton";
 import PostItem from "../../components/home/PostItem";
 import Container from "../../components/common/Container";
+import HomePageLayout from "../../components/layout/HomePageLayout";
 
 export default function Home() {
   const posts = [
@@ -40,3 +41,6 @@ export default function Home() {
     </Container>
   );
 }
+Home.getLayout = function getLayout(Home: ReactElement) {
+  return <HomePageLayout>{Home}</HomePageLayout>;
+};
