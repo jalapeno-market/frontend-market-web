@@ -2,33 +2,30 @@ import React, { useRef } from "react";
 import Button from "../common/Button";
 import styles from "./Form.module.scss";
 import Link from "next/link";
-import { fetchPost } from "../../api/api";
 import { useRouter } from "next/router";
+import { signIn } from "../../api/member";
 
 const Form = () => {
   const router = useRouter();
   const idRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const submitHandler = (e: React.FormEvent) => {
+  const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!idRef.current?.value || !passwordRef.current?.value) {
+      alert("아이디와 비밀번호를 모두 입력해주세요!");
+      return;
+    }
+
     try {
-      fetchPost(`${process.env.SERVER}/login`, {
-        loginId: idRef.current?.value,
-        password: passwordRef.current?.value,
-      }).then((res) => {
-        if (res.data) {
-          router.push("/home");
-          return;
-        }
-        if (res.code === "BAD") {
-          alert(res.message);
-          return;
-        }
-        alert("로그인 실패.. 나중에 다시 시도해보세요.");
-      });
-    } catch (error) {
-      console.log("Login Error");
+      const res = await signIn(
+        idRef.current?.value,
+        passwordRef.current?.value
+      );
+      alert(`${res.data.nickname}님 환영합니다`);
+      router.push("/home");
+    } catch (err) {
+      alert(err);
     }
   };
 
