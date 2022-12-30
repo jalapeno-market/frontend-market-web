@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./PostItem.module.scss";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { getTimeDiff } from "../../utils/getTimeDiff";
 
 type PostItemProps = {
   id: string;
@@ -37,7 +38,7 @@ const PostItem = ({
       </div>
       <div className={styles.right}>
         <div className={styles.title}>{title}</div>
-        <div className={styles.created}>{createdAt}</div>
+        <div className={styles.created}>{getTimeDiff(createdAt)}</div>
         <div className={styles.price}>{price}원</div>
       </div>
     </div>

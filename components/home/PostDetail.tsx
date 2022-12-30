@@ -22,15 +22,21 @@ type PostDetailProps = {
   };
 };
 
-//백엔드에서 유저의 프로필 이미지는 안주나요?
 const PostDetail = ({ postInfo }: PostDetailProps) => {
   return (
     <div className={styles.container}>
       <div className={styles["image"]}>
-        <Image fill={true} alt="제품사진" src={postInfo.image.img1} />
+        <Image fill={true} alt="제품사진" src={`${postInfo.image.img1}`} />
       </div>
       <div className={styles["user-box"]}>
-        <div className={styles["user-profile"]}>유저프로필이미지</div>
+        <Image
+          className={styles["user-profile"]}
+          src="/../public/image/profile.png"
+          alt="프로필"
+          width="60"
+          height="60"
+        />
+
         <div className={styles["user-nickname"]}>{postInfo.nickname}</div>
       </div>
       <div className={styles["content-box"]}>
