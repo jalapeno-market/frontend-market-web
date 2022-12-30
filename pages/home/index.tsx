@@ -1,46 +1,53 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import PostButton from "../../components/home/PostButton";
 import PostItem from "../../components/home/PostItem";
 import Container from "../../components/common/Container";
 import HomePageLayout from "../../components/layout/HomePageLayout";
+import { getAllPost } from "../../api/post";
 
-export default function Home() {
-  const posts = [
-    {
-      id: "1",
-      title: "아이패드",
-      img: "/../public/image/jalapeno.jpg",
-      createdAt: "5초 전",
-      price: "100000",
-      status: "판매중",
-    },
-    {
-      id: "2",
-      title: "아이패드",
-      img: "/../public/image/jalapeno.jpg",
-      createdAt: "5초 전",
-      price: "100000",
-      status: "판매중",
-    },
-  ].map((item) => (
-    <PostItem
-      key={item.id}
-      id={item.id}
-      title={item.title}
-      img={item.img}
-      createdAt={item.createdAt}
-      price={item.price}
-      status={item.status}
-    />
-  ));
+type HomeProps = {
+  postData: Array<{
+    id: number;
+    title: string;
+    img1: string;
+    createdAt: string;
+    price: string;
+    status: string;
+  }>;
+};
 
+export default function Home({ postData }: HomeProps) {
   return (
     <Container>
-      <div>{posts}</div>
+      <div>
+        {postData.map((item) => (
+          <PostItem
+            key={item.id}
+            id={item.id.toString()}
+            title={item.title}
+            img={item.img1}
+            createdAt={item.createdAt}
+            price={item.price}
+            status={item.status}
+          />
+        ))}
+      </div>
       <PostButton />
     </Container>
   );
 }
+
+export async function getServerSideProps(context: any) {
+  let { cookie } = context.req.headers;
+  cookie = cookie ? cookie : "";
+  const postData = await getAllPost(cookie);
+  return {
+    props: {
+      postData: postData,
+    },
+  };
+}
+
 Home.getLayout = function getLayout(Home: ReactElement) {
   return <HomePageLayout>{Home}</HomePageLayout>;
 };

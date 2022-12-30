@@ -1,8 +1,13 @@
-export const fetchGet = async (url: string | undefined) => {
+export const fetchGet = async (url: string | undefined, cookie?: string) => {
   if (!url) {
     throw new Error("fetchGet");
   }
-  const res = await fetch(url);
+  const headers = cookie ? { Cookie: cookie } : undefined;
+  const res = await fetch(url, {
+    headers: headers,
+    method: "GET",
+    credentials: "include",
+  });
   const jsonRes = await res.json();
 
   return jsonRes;
