@@ -1,8 +1,6 @@
 export const getTimeDiff = (timeString: string) => {
   const start = new Date(timeString);
   const end = new Date();
-  console.log(start.getTime());
-  console.log(end.getTime());
 
   const diffYear = Math.floor(
     (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24 * 30 * 12)
