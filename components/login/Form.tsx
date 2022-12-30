@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Button from "../common/Button";
 import styles from "./Form.module.scss";
 import Link from "next/link";
@@ -9,13 +9,15 @@ const Form = () => {
   const router = useRouter();
   const idRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [message, setMessage] = useState("");
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!idRef.current?.value || !passwordRef.current?.value) {
-      alert("아이디와 비밀번호를 모두 입력해주세요!");
+      setMessage("아이디와 비밀번호를 모두 입력해주세요!");
       return;
     }
+    setMessage("");
 
     try {
       const res = await signIn(
@@ -47,6 +49,7 @@ const Form = () => {
           className={styles["no-border-input"]}
         />
       </div>
+      <div className={styles.message}>{message}</div>
       <Button value="로그인" type="submit" />
       <Link href="/signup" className={styles["signup-link"]}>
         회원가입하러가기
