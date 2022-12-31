@@ -1,5 +1,12 @@
 .box {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+
   width: 100%;
-  padding: 15px;
-  margin-top: 65px;
+  height: calc(100vh - 55px - 65px);
+  padding: 0 15px;
+
+  position: absolute;
+  top: 65px;
 }

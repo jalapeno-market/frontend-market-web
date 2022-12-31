@@ -1,5 +1,6 @@
 import PostDetail from "../../components/home/PostDetail";
 import { getPostDetail } from "../../api/post";
+import BottomMenu from "../../components/post/BottomMenu";
 
 type PostProps = {
   postInfo: {
@@ -21,7 +22,12 @@ type PostProps = {
 };
 
 const Post = ({ postInfo }: PostProps) => {
-  return <PostDetail postInfo={postInfo} />;
+  return (
+    <>
+      <PostDetail postInfo={postInfo} />
+      <BottomMenu price={postInfo.price} />
+    </>
+  );
 };
 
 export async function getServerSideProps(context: any) {
