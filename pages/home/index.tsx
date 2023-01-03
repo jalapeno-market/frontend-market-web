@@ -37,8 +37,23 @@ export default function Home({ postData }: HomeProps) {
 
 export async function getServerSideProps(context: any) {
   let { cookie } = context.req.headers;
-  cookie = cookie ? cookie : "";
+  if (!cookie) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/",
+      },
+    };
+  }
+
   const postData = await getAllPost(cookie);
+
+  if (!postData) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       postData: postData,

@@ -1,6 +1,7 @@
 import MessageBox from "./MessageBox";
 import styles from "./ChattingRoom.module.scss";
 
+type ChattingRoomProps = {};
 const ChattingRoom = () => {
   const messages = [
     <MessageBox content="안녕하세용용" type="receive" />,

@@ -6,11 +6,11 @@ export const signIn = async (id: string, pwd: string) => {
     password: pwd,
   });
 
+  if (res.code === "BAD") {
+    throw res.code;
+  }
   if (!res.data) {
     throw "";
-  }
-  if (res.code === "BAD") {
-    throw res.message;
   }
 
   return res;
@@ -23,13 +23,12 @@ export const signUp = async (id: string, pwd: string, nickname: string) => {
     nickname: nickname,
   });
 
-  if (!res.data) {
-    throw "error";
+  if (res.code === "BAD") {
+    throw res.code;
   }
 
-  if (res.code === "BAD") {
-    alert(res.message);
-    return;
+  if (!res.data) {
+    throw "error";
   }
 
   return res;
