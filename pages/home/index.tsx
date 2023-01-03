@@ -19,19 +19,17 @@ type HomeProps = {
 export default function Home({ postData }: HomeProps) {
   return (
     <Container>
-      <div>
-        {postData.map((item) => (
-          <PostItem
-            key={item.id}
-            id={item.id.toString()}
-            title={item.title}
-            img={item.img1}
-            createdAt={item.createdAt}
-            price={item.price}
-            status={item.status}
-          />
-        ))}
-      </div>
+      {postData.map((item) => (
+        <PostItem
+          key={item.id}
+          id={item.id.toString()}
+          title={item.title}
+          img={item.img1}
+          createdAt={item.createdAt}
+          price={item.price}
+          status={item.status}
+        />
+      ))}
       <PostButton />
     </Container>
   );

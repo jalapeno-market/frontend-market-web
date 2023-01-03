@@ -3,10 +3,13 @@
 .form {
   width: 100%;
   max-width: 500px;
-
-  margin: auto;
   padding: 20px;
-  border: 1px solid color.$gray;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   text-align: center;
 }
 
