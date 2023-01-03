@@ -1,110 +1,56 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import ChattingListItem from "./ChattingListItem";
+import { getTimeDiff } from "../../utils/getTimeDiff";
+import AuthContext from "../../store/AuthContext";
 
-const rooms = [
-  {
-    id: 1,
+type ChattingListProps = {
+  ChattingListItems: Array<{
+    id: number;
     buyer: {
-      id: 2,
-      userId: "ss",
-      password: "22",
-      nickname: "song",
-    },
+      id: number;
+      userId: string;
+      password: string;
+      nickname: string;
+    };
     seller: {
-      id: 1,
-      userId: "kk",
-      password: "11",
-      nickname: "kim",
-    },
+      id: number;
+      userId: string;
+      password: string;
+      nickname: string;
+    };
     post: {
-      id: 1,
-      title: "qq",
-      contents: "qqqq",
-      image: null,
-      createdAt: "2022-11-12T06:01:50",
-      updatedAt: "2022-11-12T06:01:50",
+      id: number;
+      title: string;
+      contents: string;
+      image: string | null;
+      createdAt: string;
+      updatedAt: string;
       member: {
-        id: 1,
-        userId: "kk",
-        password: "11",
-        nickname: "kim",
-      },
-      price: null,
-      status: null,
-    },
-  },
-  {
-    id: 3,
-    buyer: {
-      id: 4,
-      userId: "hh",
-      password: "44",
-      nickname: "han",
-    },
-    seller: {
-      id: 1,
-      userId: "kk",
-      password: "11",
-      nickname: "kim",
-    },
-    post: {
-      id: 1,
-      title: "qq",
-      contents: "qqqq",
-      image: null,
-      createdAt: "2022-11-12T06:01:50",
-      updatedAt: "2022-11-12T06:01:50",
-      member: {
-        id: 1,
-        userId: "kk",
-        password: "11",
-        nickname: "kim",
-      },
-      price: null,
-      status: null,
-    },
-  },
-  {
-    id: 18,
-    buyer: {
-      id: 5,
-      userId: "mm",
-      password: "55",
-      nickname: "mun",
-    },
-    seller: {
-      id: 1,
-      userId: "kk",
-      password: "11",
-      nickname: "kim",
-    },
-    post: {
-      id: 1,
-      title: "qq",
-      contents: "qqqq",
-      image: null,
-      createdAt: "2022-11-12T06:01:50",
-      updatedAt: "2022-11-12T06:01:50",
-      member: {
-        id: 1,
-        userId: "kk",
-        password: "11",
-        nickname: "kim",
-      },
-      price: null,
-      status: null,
-    },
-  },
-];
+        id: number;
+        userId: string;
+        password: string;
+        nickname: string;
+      };
+      price: string | null;
+      status: string | null;
+    };
+  }>;
+};
 
-const ChattingList = () => {
-  const items = rooms.map((x) => (
+const ChattingList = ({ ChattingListItems }: ChattingListProps) => {
+  const ctx = useContext(AuthContext);
+  const items = ChattingListItems.map((item) => (
     <ChattingListItem
-      id={x.id}
-      nickname={x.buyer.nickname}
+      key={item.id}
+      id={item.id}
+      nickname={
+        ctx.userId === item.seller.userId
+          ? item.buyer.nickname
+          : item.seller.nickname
+      }
       profile={"url"}
-      lastMessage="last message"
-      lastUpdate="last update date"
+      lastMessage={"100원에 주시면 안되나요"}
+      lastUpdate={getTimeDiff(item.post.createdAt)}
     />
   ));
 

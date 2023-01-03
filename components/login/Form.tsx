@@ -1,11 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import Button from "../common/Button";
 import styles from "./Form.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signIn } from "../../api/member";
+import AuthContext from "../../store/AuthContext";
 
 const Form = () => {
+  const ctx = useContext(AuthContext);
   const router = useRouter();
   const idRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -24,6 +26,7 @@ const Form = () => {
         idRef.current?.value,
         passwordRef.current?.value
       );
+      ctx.onLogin(res.data.id, res.data.nickname);
       alert(`${res.data.nickname}님 환영합니다`);
       router.push("/home");
     } catch (err) {
