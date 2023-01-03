@@ -27,6 +27,10 @@ const Form = () => {
       alert(`${res.data.nickname}님 환영합니다`);
       router.push("/home");
     } catch (err) {
+      if (err === "BAD") {
+        setMessage("잘못된 아이디 혹은 비밀번호 입니다");
+        return;
+      }
       alert(err);
     }
   };

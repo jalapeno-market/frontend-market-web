@@ -1,8 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Button from "../common/Button";
 import styles from "./Form.module.scss";
 import Link from "next/link";
-import { fetchPost } from "../../api/api";
 import { signUp } from "../../api/member";
 import { useRouter } from "next/router";
 
@@ -11,6 +10,7 @@ const Form = () => {
   const nicknameRef = useRef<HTMLInputElement>(null);
   const idRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [message, setMessage] = useState("");
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const Form = () => {
       !passwordRef.current?.value ||
       !nicknameRef.current?.value
     ) {
-      alert("모두 입력해주세요");
+      setMessage("모두 입력해주세요");
       return;
     }
 
@@ -33,7 +33,11 @@ const Form = () => {
       alert("회원가입 성공! 로그인페이지로 이동합니다.");
       router.push("/");
     } catch (error) {
-      alert("회원가입 실패");
+      if (error === "BAD") {
+        setMessage("이미 존재하는 ID 입니다.");
+        return;
+      }
+      alert(error);
     }
   };
 
@@ -63,7 +67,7 @@ const Form = () => {
           className={styles["no-border-input"]}
         />
       </div>
-
+      <div className={styles.message}>{message}</div>
       <Button value="회원가입" type="submit" />
       <Link href="/" className={styles["signup-link"]}>
         로그인하러 가기
