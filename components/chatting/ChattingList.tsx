@@ -39,6 +39,7 @@ type ChattingListProps = {
 
 const ChattingList = ({ ChattingListItems }: ChattingListProps) => {
   const ctx = useContext(AuthContext);
+
   const items = ChattingListItems.map((item) => (
     <ChattingListItem
       key={item.id}

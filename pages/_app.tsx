@@ -1,8 +1,9 @@
+import React from "react";
 import { AppProps } from "next/app";
-import type { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, useState } from "react";
 import type { NextPage } from "next";
 import "../styles/global.scss";
-import { AuthContextProvider } from "../store/AuthContext";
+import AuthContext from "../store/AuthContext";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -15,10 +16,26 @@ type AppPropsWithLayout = AppProps & {
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page) => page);
 
+  const [userId, setUserId] = useState("");
+  const [userNickname, setUserNickname] = useState("");
+
   return getLayout(
-    <AuthContextProvider>
+    <AuthContext.Provider
+      value={{
+        userId: userId,
+        nickname: userNickname,
+        onLogin: (id, nickname) => {
+          setUserId(id);
+          setUserNickname(nickname);
+        },
+        onLogout: () => {
+          setUserId("");
+          setUserNickname("");
+        },
+      }}
+    >
       <Component {...pageProps} />
-    </AuthContextProvider>
+    </AuthContext.Provider>
   );
 }
 
