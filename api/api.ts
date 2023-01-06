@@ -28,3 +28,18 @@ export const fetchPost = async (url: string | undefined, requestBody: any) => {
 
   return jsonRes;
 };
+
+export const fetchDelete = async (url: string | undefined) => {
+  if (!url) {
+    throw new Error("fetchDelete");
+  }
+
+  const res = await fetch(url, {
+    method: "DELETE",
+    credentials: "include",
+  });
+
+  const jsonRes = await res.json();
+
+  return jsonRes;
+};

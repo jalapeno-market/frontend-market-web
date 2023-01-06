@@ -1,4 +1,4 @@
-import { fetchGet, fetchPost } from "./api";
+import { fetchDelete, fetchGet, fetchPost } from "./api";
 
 export const makePost = async (formData: FormData) => {
   const res = await fetch(`${process.env.SERVER}/post`, {
@@ -38,6 +38,12 @@ export const getPostDetail = async (id: string, cookie?: string) => {
   }
 
   return res.data;
+};
+
+export const deletePost = async (postId: string) => {
+  const res = await fetchDelete(`${process.env.SERVER}/post/${postId}`);
+
+  return res;
 };
 
 export const getPostById = async () => {};

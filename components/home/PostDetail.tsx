@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./PostDetail.module.scss";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { getTimeDiff } from "../../utils/getTimeDiff";
+import deleteIcon from "../../public/image/postDetail/delete.png";
+import returnIcon from "../../public/image/postDetail/return.png";
+import AuthContext from "../../store/AuthContext";
+import { deletePost } from "../../api/post";
 
 type PostDetailProps = {
   postInfo: {
@@ -23,8 +28,28 @@ type PostDetailProps = {
 };
 
 const PostDetail = ({ postInfo }: PostDetailProps) => {
+  const router = useRouter();
+  const ctx = useContext(AuthContext);
+
+  const backButtonClickHandler = () => {
+    router.back();
+  };
+  const deleteButtonHandler = async () => {
+    await deletePost(postInfo.id);
+    alert("삭제되었습니다.");
+    router.push("/home");
+  };
+
   return (
     <div className={styles.container}>
+      {ctx.userId === postInfo.userId && (
+        <div className={styles["delete-btn"]} onClick={deleteButtonHandler}>
+          <Image src={deleteIcon} alt="delete" fill={true} />
+        </div>
+      )}
+      <div className={styles["back-btn"]} onClick={backButtonClickHandler}>
+        <Image src={returnIcon} alt="back" fill={true} />
+      </div>
       <div className={styles["image"]}>
         <Image fill={true} alt="제품사진" src={`${postInfo.image.img1}`} />
       </div>
