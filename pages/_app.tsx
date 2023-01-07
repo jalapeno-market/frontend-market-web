@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AppProps } from "next/app";
 import { ReactElement, ReactNode, useState } from "react";
 import type { NextPage } from "next";
@@ -18,6 +18,15 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   const [userId, setUserId] = useState("");
   const [userNickname, setUserNickname] = useState("");
+
+  useEffect(() => {
+    const userId = sessionStorage.getItem("id");
+    const nickname = sessionStorage.getItem("nickname");
+    if (userId && nickname) {
+      setUserId(userId);
+      setUserNickname(nickname);
+    }
+  }, []);
 
   return getLayout(
     <AuthContext.Provider

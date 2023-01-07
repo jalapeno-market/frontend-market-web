@@ -27,6 +27,8 @@ const Form = () => {
         passwordRef.current?.value
       );
       ctx.onLogin(res.data.userId, res.data.nickname);
+      sessionStorage.setItem("id", res.data.userId);
+      sessionStorage.setItem("nickname", res.data.nickname);
       alert(`${res.data.nickname}님 환영합니다`);
       router.push("/home");
     } catch (err) {
