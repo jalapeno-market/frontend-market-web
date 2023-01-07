@@ -39,7 +39,5 @@ export const fetchDelete = async (url: string | undefined) => {
     credentials: "include",
   });
 
-  const jsonRes = await res.json();
-
-  return jsonRes;
+  return res;
 };

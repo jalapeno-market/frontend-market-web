@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
-import React, { ReactElement, useContext, useEffect, useState } from "react";
+import React, { useRef, useContext, useEffect, useState } from "react";
 import { getChats } from "../../api/chatting";
+import { makeWebSocket } from "../../api/websocket";
 import ChattingRoom from "../../components/chatting/room/ChattingRoom";
 import Container from "../../components/common/Container";
 import ChattingInputBar from "../../components/layout/bottom/ChattingInputBar";
@@ -64,24 +65,36 @@ type RoomProps = {
 const Room = ({ roomId, chats }: RoomProps) => {
   const ctx = useContext(AuthContext);
   const router = useRouter();
-  const ws = new WebSocket(`${process.env.WEBSOCKET}`);
+  const ws = useRef<WebSocket | null>(null);
   const [chatList, setChatList] = useState(chats);
 
-  ws.onopen = () => {
-    ws.send(
+  useEffect(() => {
+    if (ws.current) {
+      return;
+    }
+
+    ws.current = makeWebSocket(roomId, ctx.userId);
+
+    ws.current.onmessage = async (e: any) => {
+      console.log(e);
+      const newchats = await getChats(roomId.toString());
+      setChatList(newchats);
+    };
+  }, [ctx.userId, roomId]);
+
+  const sendMessage = (message: string) => {
+    if (!ws.current) {
+      return;
+    }
+
+    ws.current.send(
       JSON.stringify({
-        type: "ENTER",
+        type: "TALK",
         roomId: roomId,
         senderUserId: ctx.userId,
-        message: "",
+        message: message,
       })
     );
-  };
-
-  ws.onmessage = async (e) => {
-    console.log(e);
-    const newchats = await getChats(roomId.toString());
-    setChatList(newchats);
   };
 
   return (
@@ -90,7 +103,11 @@ const Room = ({ roomId, chats }: RoomProps) => {
         nickname={router.query.chatOp ? (router.query.chatOp as string) : ""}
       />
       <ChattingRoom roomId={roomId} chats={chatList} />
-      <ChattingInputBar roomId={roomId} ws={ws} />
+      <ChattingInputBar
+        roomId={roomId}
+        sendMessage={sendMessage}
+        ws={ws.current}
+      />
     </Container>
   );
 };

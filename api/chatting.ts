@@ -50,6 +50,4 @@ export const deleteChattingRoom = async (roomId: number | string) => {
   const res = await fetchDelete(
     `${process.env.SERVER}/chatting-rooms/${roomId}`
   );
-
-  return res;
 };
