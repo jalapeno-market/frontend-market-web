@@ -1,4 +1,4 @@
-import { fetchGet, fetchPost } from "./api";
+import { fetchDelete, fetchGet, fetchPost } from "./api";
 
 export const getChattingRooms = async (cookie?: string) => {
   const res = await fetchGet(`${process.env.SERVER}/chatting-rooms`, cookie);
@@ -42,6 +42,14 @@ export const getChats = async (roomId: string, cookie?: string) => {
   if (res.code) {
     throw new Error(res.code);
   }
+
+  return res;
+};
+
+export const deleteChattingRoom = async (roomId: number | string) => {
+  const res = await fetchDelete(
+    `${process.env.SERVER}/chatting-rooms/${roomId}`
+  );
 
   return res;
 };
