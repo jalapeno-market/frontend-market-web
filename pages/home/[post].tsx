@@ -25,7 +25,11 @@ const Post = ({ postInfo }: PostProps) => {
   return (
     <>
       <PostDetail postInfo={postInfo} />
-      <BottomMenu price={postInfo.price} />
+      <BottomMenu
+        postId={postInfo.id}
+        nickname={postInfo.nickname}
+        price={postInfo.price}
+      />
     </>
   );
 };

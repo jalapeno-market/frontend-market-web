@@ -1,9 +1,10 @@
+import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { getChats } from "../../api/chatting";
 import ChattingRoom from "../../components/chatting/room/ChattingRoom";
 import Container from "../../components/common/Container";
 import ChattingInputBar from "../../components/layout/bottom/ChattingInputBar";
-import ChattingRoomLayout from "../../components/layout/ChattingRoomLayout";
+import ChattingRoomHeader from "../../components/layout/header/ChattingRoomHeader";
 import AuthContext from "../../store/AuthContext";
 
 type Chatting = {
@@ -62,6 +63,7 @@ type RoomProps = {
 
 const Room = ({ roomId, chats }: RoomProps) => {
   const ctx = useContext(AuthContext);
+  const router = useRouter();
   const ws = new WebSocket(`${process.env.WEBSOCKET}`);
   const [chatList, setChatList] = useState(chats);
 
@@ -84,6 +86,9 @@ const Room = ({ roomId, chats }: RoomProps) => {
 
   return (
     <Container>
+      <ChattingRoomHeader
+        nickname={router.query.chatOp ? (router.query.chatOp as string) : ""}
+      />
       <ChattingRoom roomId={roomId} chats={chatList} />
       <ChattingInputBar roomId={roomId} ws={ws} />
     </Container>
@@ -99,10 +104,6 @@ export const getServerSideProps = async (context: any) => {
   return {
     props: { roomId, chats },
   };
-};
-
-Room.getLayout = function getLayout(Room: ReactElement) {
-  return <ChattingRoomLayout>{Room}</ChattingRoomLayout>;
 };
 
 export default Room;

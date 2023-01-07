@@ -8,13 +8,9 @@ import hamburgerIcon from "../../../public/image/chatting/iconmonstr-menu-dot-ve
 
 type ChattingRoomHeaderProps = {
   nickname: string;
-  scoville: number;
 };
 
-const ChattingRoomHeader = ({
-  nickname,
-  scoville,
-}: ChattingRoomHeaderProps) => {
+const ChattingRoomHeader = ({ nickname }: ChattingRoomHeaderProps) => {
   const router = useRouter();
   const clickBackButtonHandler = () => {
     router.push("/chatting");

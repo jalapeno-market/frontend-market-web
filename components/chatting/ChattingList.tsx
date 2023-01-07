@@ -44,6 +44,7 @@ const ChattingList = ({ ChattingListItems }: ChattingListProps) => {
     <ChattingListItem
       key={item.id}
       id={item.id}
+      postId={item.post.id}
       nickname={
         ctx.userId === item.seller.userId
           ? item.buyer.nickname

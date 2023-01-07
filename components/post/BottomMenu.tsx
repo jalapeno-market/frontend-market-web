@@ -3,16 +3,21 @@ import { makeChattingRoom } from "../../api/chatting";
 import { useRouter } from "next/router";
 
 type BottomMenuProps = {
+  postId: string;
+  nickname: string;
   price: string;
 };
 
-function BottomMenu({ price }: BottomMenuProps) {
+function BottomMenu({ postId, nickname, price }: BottomMenuProps) {
   const router = useRouter();
 
   const buttonClickHandler = async () => {
     try {
       const data = await makeChattingRoom(router.query.post as string);
-      router.push(`/chatting/${data.id}`);
+      router.push({
+        pathname: `/chatting/${data.id}`,
+        query: { postId: postId, chatOp: nickname },
+      });
     } catch (err: any) {
       console.log(err);
       alert(err.message);

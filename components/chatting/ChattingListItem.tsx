@@ -5,6 +5,7 @@ import Image from "next/image";
 
 type ChattingListItemProps = {
   id: number;
+  postId: number;
   nickname: string;
   profile: string;
   lastMessage: string;
@@ -13,13 +14,17 @@ type ChattingListItemProps = {
 
 const ChattingListItem = ({
   id,
+  postId,
   nickname,
   profile,
   lastMessage,
   lastUpdate,
 }: ChattingListItemProps) => {
   const clickHandler = () => {
-    Router.push(`/chatting/${id}`);
+    Router.push({
+      pathname: `/chatting/${id}`,
+      query: { postId: postId, chatOp: nickname },
+    });
   };
 
   return (
