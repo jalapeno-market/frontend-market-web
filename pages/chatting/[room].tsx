@@ -1,9 +1,10 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { getChats } from "../../api/chatting";
 import ChattingRoom from "../../components/chatting/room/ChattingRoom";
 import Container from "../../components/common/Container";
 import ChattingInputBar from "../../components/layout/bottom/ChattingInputBar";
 import ChattingRoomLayout from "../../components/layout/ChattingRoomLayout";
+import AuthContext from "../../store/AuthContext";
 
 type Chatting = {
   id: number;
@@ -55,19 +56,36 @@ type Chatting = {
   };
 };
 type RoomProps = {
-  roomId: string;
+  roomId: number;
   chats: Array<Chatting>;
 };
 
 const Room = ({ roomId, chats }: RoomProps) => {
-  useEffect(() => {
-    const ws = new WebSocket(`${process.env.WEBSOCKET}`);
-  }, []);
+  const ctx = useContext(AuthContext);
+  const ws = new WebSocket(`${process.env.WEBSOCKET}`);
+  const [chatList, setChatList] = useState(chats);
+
+  ws.onopen = () => {
+    ws.send(
+      JSON.stringify({
+        type: "ENTER",
+        roomId: roomId,
+        senderUserId: ctx.userId,
+        message: "",
+      })
+    );
+  };
+
+  ws.onmessage = async (e) => {
+    console.log(e);
+    const newchats = await getChats(roomId.toString());
+    setChatList(newchats);
+  };
 
   return (
     <Container>
-      <ChattingRoom roomId={roomId} chats={chats} />
-      <ChattingInputBar />
+      <ChattingRoom roomId={roomId} chats={chatList} />
+      <ChattingInputBar roomId={roomId} ws={ws} />
     </Container>
   );
 };
