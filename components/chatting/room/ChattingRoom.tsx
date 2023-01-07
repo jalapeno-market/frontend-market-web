@@ -1,6 +1,5 @@
 import MessageBox from "./MessageBox";
 import styles from "./ChattingRoom.module.scss";
-import { getChats } from "../../../api/chatting";
 import { useContext } from "react";
 import AuthContext from "../../../store/AuthContext";
 
@@ -55,7 +54,7 @@ type Chatting = {
 };
 
 type ChattingRoomProps = {
-  roomId: string;
+  roomId: number;
   chats: Array<Chatting>;
 };
 
@@ -69,7 +68,6 @@ const ChattingRoom = ({ roomId, chats }: ChattingRoomProps) => {
       type={chat.sender.userId === ctx.userId ? "send" : ""}
     />
   ));
-  // const messages = <MessageBox content="dx" type="send" />;
 
   return <div className={styles.room}>{messages}</div>;
 };
