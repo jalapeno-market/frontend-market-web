@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef } from "react";
-import AuthContext from "../../../store/AuthContext";
+import React, { useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import styles from "./ChattingInputBar.module.scss";
 
 type ChattingInputBarProps = {
@@ -13,8 +13,8 @@ const ChattingInputBar = ({
   roomId,
   sendMessage,
 }: ChattingInputBarProps) => {
-  const ctx = useContext(AuthContext);
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const clickSendButtonHandler = () => {
     if (!inputRef.current || !inputRef.current.value) {

@@ -3,7 +3,7 @@
 .send-box {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 5px;
+  margin: 5px;
 }
 
 .send-box > div {
@@ -19,7 +19,7 @@
 
 .receive-box {
   display: flex;
-  margin-bottom: 5px;
+  margin: 5px;
 }
 .receive-box > div {
   display: inline-block;

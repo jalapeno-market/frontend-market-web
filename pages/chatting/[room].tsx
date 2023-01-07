@@ -98,7 +98,7 @@ const Room = ({ roomId, chats }: RoomProps) => {
   };
 
   return (
-    <Container>
+    <>
       <ChattingRoomHeader
         nickname={router.query.chatOp ? (router.query.chatOp as string) : ""}
       />
@@ -108,7 +108,7 @@ const Room = ({ roomId, chats }: RoomProps) => {
         sendMessage={sendMessage}
         ws={ws.current}
       />
-    </Container>
+    </>
   );
 };
 
