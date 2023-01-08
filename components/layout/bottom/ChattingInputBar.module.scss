@@ -20,14 +20,16 @@
   height: 20px;
   border: none;
   flex-grow: 0;
-  background: url(../../../public/image/chatting/iconmonstr-paper-plane-1.svg);
+  background: url(../../../public/image/chatting/send.png);
+  background-size: contain;
 }
 
 .input {
-  height: 30px;
+  height: 35px;
   margin: 0 10px;
+  padding: 5px;
   border-radius: 10px;
   border: none;
   flex-grow: 1;
-  background-color: rgb(206, 206, 206);
+  background-color: rgb(231, 231, 231);
 }

@@ -17,7 +17,11 @@ const ChattingInputBar = ({
   const router = useRouter();
 
   const clickSendButtonHandler = () => {
-    if (!inputRef.current || !inputRef.current.value) {
+    if (
+      !inputRef.current ||
+      !inputRef.current.value ||
+      !inputRef.current.value.trim()
+    ) {
       return;
     }
     sendMessage(inputRef.current?.value);
