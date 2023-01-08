@@ -3,6 +3,10 @@
 .form {
   display: flex;
   flex-direction: column;
+  position: fixed;
+  top: 64px;
+  width: 100%;
+  padding: 0 15px;
 }
 
 .form input::placeholder,
