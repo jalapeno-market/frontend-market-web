@@ -2,39 +2,10 @@ import React, { useContext } from "react";
 import ChattingListItem from "./ChattingListItem";
 import { getTimeDiff } from "../../utils/getTimeDiff";
 import AuthContext from "../../store/AuthContext";
+import { chattingRoomDto } from "../../types/dto/chatting";
 
 type ChattingListProps = {
-  ChattingListItems: Array<{
-    id: number;
-    buyer: {
-      id: number;
-      userId: string;
-      password: string;
-      nickname: string;
-    };
-    seller: {
-      id: number;
-      userId: string;
-      password: string;
-      nickname: string;
-    };
-    post: {
-      id: number;
-      title: string;
-      contents: string;
-      image: string | null;
-      createdAt: string;
-      updatedAt: string;
-      member: {
-        id: number;
-        userId: string;
-        password: string;
-        nickname: string;
-      };
-      price: string | null;
-      status: string | null;
-    };
-  }>;
+  ChattingListItems: Array<chattingRoomDto>;
 };
 
 const ChattingList = ({ ChattingListItems }: ChattingListProps) => {

@@ -1,24 +1,10 @@
 import PostDetail from "../../components/home/PostDetail";
 import { getPostDetail } from "../../api/post";
 import BottomMenu from "../../components/post/BottomMenu";
+import { postDetailDto } from "../../types/dto/post";
 
 type PostProps = {
-  postInfo: {
-    id: string;
-    title: string;
-    contents: string;
-    image: {
-      img1: string;
-      img2: string | null;
-      img3: string | null;
-    };
-    createdAt: string;
-    updatedAt: string | null;
-    userId: string;
-    nickname: string;
-    price: string;
-    status: string;
-  };
+  postInfo: postDetailDto;
 };
 
 const Post = ({ postInfo }: PostProps) => {

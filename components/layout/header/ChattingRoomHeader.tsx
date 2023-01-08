@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "./ChattingRoomHeader.module.scss";
 import { useRouter } from "next/router";
 import Image from "next/image";
-
 import arrowIcon from "../../../public/image/chatting/iconmonstr-angel-left-thin.svg";
 import hamburgerIcon from "../../../public/image/chatting/iconmonstr-menu-dot-vertical-lined.svg";
 import { deleteChattingRoom } from "../../../api/chatting";
