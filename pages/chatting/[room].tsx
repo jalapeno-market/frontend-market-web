@@ -8,75 +8,13 @@ import ChattingRoomInfo from "../../components/chatting/room/ChattingRoomInfo";
 import ChattingInputBar from "../../components/layout/bottom/ChattingInputBar";
 import ChattingRoomHeader from "../../components/layout/header/ChattingRoomHeader";
 import AuthContext from "../../store/AuthContext";
+import { chatDto } from "../../types/dto/chatting";
+import { postDetailDto } from "../../types/dto/post";
 
-type Chatting = {
-  id: number;
-  contents: string;
-  createdAt: string;
-  updatedAt: string;
-  chattingRoom: {
-    id: number;
-    buyer: {
-      id: string;
-      userId: string;
-      password: string;
-      nickname: string;
-    };
-    seller: {
-      id: number;
-      userId: string;
-      password: string;
-      nickname: string;
-    };
-    post: {
-      id: number;
-      title: string;
-      contents: string;
-      image: null;
-      createdAt: string;
-      updatedAt: string;
-      member: {
-        id: number;
-        userId: string;
-        password: string;
-        nickname: string;
-      };
-      price: null;
-      status: null;
-    };
-  };
-  sender: {
-    id: number;
-    userId: string;
-    password: string;
-    nickname: string;
-  };
-  receiver: {
-    id: number;
-    userId: string;
-    password: string;
-    nickname: string;
-  };
-};
 type RoomProps = {
   roomId: number;
-  chats: Array<Chatting>;
-  postInfo: {
-    id: number;
-    title: string;
-    contents: string;
-    image: {
-      img1: string;
-      img2: null;
-      img3: null;
-    };
-    createdAt: string;
-    updatedAt: null;
-    userId: string;
-    nickname: string;
-    price: string;
-    status: string;
-  };
+  chats: Array<chatDto>;
+  postInfo: postDetailDto;
 };
 
 const Room = ({ roomId, chats, postInfo }: RoomProps) => {

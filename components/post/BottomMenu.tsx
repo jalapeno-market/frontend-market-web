@@ -3,7 +3,7 @@ import { makeChattingRoom } from "../../api/chatting";
 import { useRouter } from "next/router";
 
 type BottomMenuProps = {
-  postId: string;
+  postId: number;
   nickname: string;
   price: string;
 };

@@ -2,66 +2,17 @@ import MessageBox from "./MessageBox";
 import styles from "./ChattingRoom.module.scss";
 import { useContext } from "react";
 import AuthContext from "../../../store/AuthContext";
-
-type Chatting = {
-  id: number;
-  contents: string;
-  createdAt: string;
-  updatedAt: string;
-  chattingRoom: {
-    id: number;
-    buyer: {
-      id: string;
-      userId: string;
-      password: string;
-      nickname: string;
-    };
-    seller: {
-      id: number;
-      userId: string;
-      password: string;
-      nickname: string;
-    };
-    post: {
-      id: number;
-      title: string;
-      contents: string;
-      image: null;
-      createdAt: string;
-      updatedAt: string;
-      member: {
-        id: number;
-        userId: string;
-        password: string;
-        nickname: string;
-      };
-      price: null;
-      status: null;
-    };
-  };
-  sender: {
-    id: number;
-    userId: string;
-    password: string;
-    nickname: string;
-  };
-  receiver: {
-    id: number;
-    userId: string;
-    password: string;
-    nickname: string;
-  };
-};
+import { chatDto } from "../../../types/dto/chatting";
 
 type ChattingRoomProps = {
   roomId: number;
-  chats: Array<Chatting>;
+  chats: Array<chatDto>;
 };
 
 const ChattingRoom = ({ roomId, chats }: ChattingRoomProps) => {
   const ctx = useContext(AuthContext);
 
-  const messages = chats.map((chat: Chatting) => (
+  const messages = chats.map((chat: chatDto) => (
     <MessageBox
       key={chat.id}
       content={chat.contents}

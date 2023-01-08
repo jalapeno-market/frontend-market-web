@@ -4,39 +4,10 @@ import ChattingPageLayout from "../../components/layout/ChattingPageLayout";
 import ChattingList from "../../components/chatting/ChattingList";
 import Container from "../../components/common/Container";
 import { getChattingRooms } from "../../api/chatting";
+import { chattingRoomDto } from "../../types/dto/chatting";
 
 type ChattingPageProps = {
-  rooms: Array<{
-    id: number;
-    buyer: {
-      id: number;
-      userId: string;
-      password: string;
-      nickname: string;
-    };
-    seller: {
-      id: number;
-      userId: string;
-      password: string;
-      nickname: string;
-    };
-    post: {
-      id: number;
-      title: string;
-      contents: string;
-      image: string | null;
-      createdAt: string;
-      updatedAt: string;
-      member: {
-        id: number;
-        userId: string;
-        password: string;
-        nickname: string;
-      };
-      price: string | null;
-      status: string | null;
-    };
-  }>;
+  rooms: Array<chattingRoomDto>;
 };
 
 function Chatting({ rooms }: ChattingPageProps) {

@@ -2,7 +2,6 @@ import Link from "next/link";
 import styles from "./Navigation.module.scss";
 import { useRouter } from "next/router";
 import Image from "next/image";
-
 import homeImg from "../../../public/image/navigation/home.png";
 import homeImg_active from "../../../public/image/navigation/home_active.png";
 import chattingImg from "../../../public/image/navigation/chat.png";

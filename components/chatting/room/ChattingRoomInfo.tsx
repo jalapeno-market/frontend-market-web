@@ -1,28 +1,12 @@
 import styles from "./ChattingRoomInfo.module.scss";
 import Image from "next/image";
+import { postDetailDto } from "../../../types/dto/post";
 
 type ChattingRoomInfoProps = {
-  info: {
-    id: number;
-    title: string;
-    contents: string;
-    image: {
-      img1: string;
-      img2: null;
-      img3: null;
-    };
-    createdAt: string;
-    updatedAt: null;
-    userId: string;
-    nickname: string;
-    price: string;
-    status: string;
-  };
+  info: postDetailDto;
 };
 
 function ChattingRoomInfo({ info }: ChattingRoomInfoProps) {
-  console.log(info);
-
   return (
     <div className={styles["box"]}>
       <div className={styles["info-left"]}>

@@ -1,19 +1,13 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement } from "react";
 import PostButton from "../../components/home/PostButton";
 import PostItem from "../../components/home/PostItem";
 import Container from "../../components/common/Container";
 import HomePageLayout from "../../components/layout/HomePageLayout";
 import { getAllPost } from "../../api/post";
+import { postDto } from "../../types/dto/post";
 
 type HomeProps = {
-  postData: Array<{
-    id: number;
-    title: string;
-    img1: string;
-    createdAt: string;
-    price: string;
-    status: string;
-  }>;
+  postData: Array<postDto>;
 };
 
 export default function Home({ postData }: HomeProps) {

@@ -7,24 +7,10 @@ import deleteIcon from "../../public/image/postDetail/delete.png";
 import returnIcon from "../../public/image/postDetail/return.png";
 import AuthContext from "../../store/AuthContext";
 import { deletePost } from "../../api/post";
+import { postDetailDto } from "../../types/dto/post";
 
 type PostDetailProps = {
-  postInfo: {
-    id: string;
-    title: string;
-    contents: string;
-    image: {
-      img1: string;
-      img2: string | null;
-      img3: string | null;
-    };
-    createdAt: string;
-    updatedAt: string | null;
-    userId: string;
-    nickname: string;
-    price: string;
-    status: string;
-  };
+  postInfo: postDetailDto;
 };
 
 const PostDetail = ({ postInfo }: PostDetailProps) => {
@@ -35,7 +21,7 @@ const PostDetail = ({ postInfo }: PostDetailProps) => {
     router.back();
   };
   const deleteButtonHandler = async () => {
-    await deletePost(postInfo.id);
+    await deletePost(postInfo.id.toString());
     alert("삭제되었습니다.");
     router.push("/home");
   };
