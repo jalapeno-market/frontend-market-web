@@ -25,6 +25,12 @@ const ChattingInputBar = ({
   };
 
   useEffect(() => {
+    if (ws?.readyState === 3) {
+      router.push("/chatting");
+    }
+  }, [ws?.readyState, router]);
+
+  useEffect(() => {
     return () => {
       if (!ws) {
         return;
