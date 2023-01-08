@@ -21,9 +21,16 @@ function Chatting({ rooms }: ChattingPageProps) {
 export async function getServerSideProps(context: any) {
   let { cookie } = context.req.headers;
   cookie = cookie ? cookie : "";
-  const rooms = await getChattingRooms(cookie);
 
-  return { props: { rooms } };
+  try {
+    const rooms = await getChattingRooms(cookie);
+    if (!rooms) {
+      return { notFound: true };
+    }
+    return { props: { rooms } };
+  } catch (e) {
+    return { notFound: true };
+  }
 }
 
 Chatting.getLayout = function getLayout(Chatting: ReactElement) {

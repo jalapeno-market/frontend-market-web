@@ -23,13 +23,20 @@ const Post = ({ postInfo }: PostProps) => {
 export async function getServerSideProps(context: any) {
   let { cookie } = context.req.headers;
   cookie = cookie ? cookie : "";
-  const postInfo = await getPostDetail(context.query.post, cookie);
 
-  return {
-    props: {
-      postInfo,
-    },
-  };
+  try {
+    const postInfo = await getPostDetail(context.query.post, cookie);
+    if (!postInfo) {
+      return { notFound: true };
+    }
+    return {
+      props: {
+        postInfo,
+      },
+    };
+  } catch (e) {
+    return { notFound: true };
+  }
 }
 
 export default Post;

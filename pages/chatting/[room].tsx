@@ -71,15 +71,20 @@ const Room = ({ roomId, chats, postInfo }: RoomProps) => {
 export const getServerSideProps = async (context: any) => {
   let { cookie } = context.req.headers;
   cookie = cookie ? cookie : "";
-  const roomId = context.query.room;
-  const chats = await getChats(roomId, cookie);
 
-  const postId = context.query.postId;
-  const postInfo = await getPostDetail(postId, cookie);
+  try {
+    const roomId = context.query.room;
+    const chats = await getChats(roomId, cookie);
 
-  return {
-    props: { roomId, chats, postInfo },
-  };
+    const postId = context.query.postId;
+    const postInfo = await getPostDetail(postId, cookie);
+
+    return {
+      props: { roomId, chats, postInfo },
+    };
+  } catch (e) {
+    return { notFound: true };
+  }
 };
 
 export default Room;

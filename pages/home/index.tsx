@@ -40,19 +40,21 @@ export async function getServerSideProps(context: any) {
     };
   }
 
-  const postData = await getAllPost(cookie);
-
-  if (!postData) {
+  try {
+    const postData = await getAllPost(cookie);
+    if (!postData) {
+      return {
+        notFound: true,
+      };
+    }
     return {
-      notFound: true,
+      props: {
+        postData,
+      },
     };
+  } catch (e) {
+    return { notFound: true };
   }
-
-  return {
-    props: {
-      postData: postData,
-    },
-  };
 }
 
 Home.getLayout = function getLayout(Home: ReactElement) {
