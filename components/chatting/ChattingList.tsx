@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import ChattingListItem from "./ChattingListItem";
-import { getTimeDiff } from "../../utils/getTimeDiff";
 import AuthContext from "../../store/AuthContext";
 import { chattingRoomDto } from "../../types/dto/chatting";
 
@@ -22,8 +21,6 @@ const ChattingList = ({ ChattingListItems }: ChattingListProps) => {
           : item.seller.nickname
       }
       profile={"url"}
-      lastMessage={"100원에 주시면 안되나요"}
-      lastUpdate={getTimeDiff(item.post.createdAt)}
     />
   ));
 

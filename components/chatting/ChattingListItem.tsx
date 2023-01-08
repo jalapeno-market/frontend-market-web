@@ -1,15 +1,15 @@
 import Router from "next/router";
-import React from "react";
+import React, { useLayoutEffect, useState } from "react";
 import styles from "./ChattingListItem.module.scss";
 import Image from "next/image";
+import { getChats } from "../../api/chatting";
+import { getTimeDiff } from "../../utils/getTimeDiff";
 
 type ChattingListItemProps = {
   id: number;
   postId: number;
   nickname: string;
   profile: string;
-  lastMessage: string;
-  lastUpdate: string;
 };
 
 const ChattingListItem = ({
@@ -17,15 +17,24 @@ const ChattingListItem = ({
   postId,
   nickname,
   profile,
-  lastMessage,
-  lastUpdate,
 }: ChattingListItemProps) => {
+  const [lastMessage, setLastMessage] = useState("");
+  const [lastUpdate, setLastUpdate] = useState("");
   const clickHandler = () => {
     Router.push({
       pathname: `/chatting/${id}`,
       query: { postId: postId, chatOp: nickname },
     });
   };
+
+  useLayoutEffect(() => {
+    getChats(id.toString()).then((data) => {
+      if (data[data.length - 1].contents) {
+        setLastMessage(data[data.length - 1].contents);
+        setLastUpdate(getTimeDiff(data[data.length - 1].updatedAt));
+      }
+    });
+  }, [id]);
 
   return (
     <div className={styles.box} onClick={clickHandler}>
