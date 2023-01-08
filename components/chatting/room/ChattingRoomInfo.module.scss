@@ -1,0 +1,35 @@
+@use "../../../styles/color.scss" as color;
+.box {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 55px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid color.$gray;
+}
+.info-left {
+  margin-left: 10px;
+}
+.info-right {
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+.right-top {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+}
+
+.state {
+  color: rgb(0, 100, 38);
+  font-weight: 800;
+  margin-right: 5px;
+}
+.title {
+}
+.price {
+}

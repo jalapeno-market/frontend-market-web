@@ -45,5 +45,3 @@ export const deletePost = async (postId: string) => {
 
   return res;
 };
-
-export const getPostById = async () => {};

@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
 import React, { useRef, useContext, useEffect, useState } from "react";
 import { getChats } from "../../api/chatting";
+import { getPostDetail } from "../../api/post";
 import { makeWebSocket } from "../../api/websocket";
 import ChattingRoom from "../../components/chatting/room/ChattingRoom";
-import Container from "../../components/common/Container";
+import ChattingRoomInfo from "../../components/chatting/room/ChattingRoomInfo";
 import ChattingInputBar from "../../components/layout/bottom/ChattingInputBar";
 import ChattingRoomHeader from "../../components/layout/header/ChattingRoomHeader";
 import AuthContext from "../../store/AuthContext";
@@ -60,9 +61,25 @@ type Chatting = {
 type RoomProps = {
   roomId: number;
   chats: Array<Chatting>;
+  postInfo: {
+    id: number;
+    title: string;
+    contents: string;
+    image: {
+      img1: string;
+      img2: null;
+      img3: null;
+    };
+    createdAt: string;
+    updatedAt: null;
+    userId: string;
+    nickname: string;
+    price: string;
+    status: string;
+  };
 };
 
-const Room = ({ roomId, chats }: RoomProps) => {
+const Room = ({ roomId, chats, postInfo }: RoomProps) => {
   const ctx = useContext(AuthContext);
   const router = useRouter();
   const ws = useRef<WebSocket | null>(null);
@@ -102,6 +119,7 @@ const Room = ({ roomId, chats }: RoomProps) => {
       <ChattingRoomHeader
         nickname={router.query.chatOp ? (router.query.chatOp as string) : ""}
       />
+      <ChattingRoomInfo info={postInfo} />
       <ChattingRoom roomId={roomId} chats={chatList} />
       <ChattingInputBar
         roomId={roomId}
@@ -118,8 +136,11 @@ export const getServerSideProps = async (context: any) => {
   const roomId = context.query.room;
   const chats = await getChats(roomId, cookie);
 
+  const postId = context.query.postId;
+  const postInfo = await getPostDetail(postId, cookie);
+
   return {
-    props: { roomId, chats },
+    props: { roomId, chats, postInfo },
   };
 };
 
