@@ -12,6 +12,7 @@ const Post = ({ postInfo }: PostProps) => {
     <>
       <PostDetail postInfo={postInfo} />
       <BottomMenu
+        ownerId={postInfo.userId}
         postId={postInfo.id}
         nickname={postInfo.nickname}
         price={postInfo.price}

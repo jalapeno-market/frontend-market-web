@@ -11,7 +11,7 @@ export const getChattingRoomByPost = async (
   cookie?: string
 ) => {
   const res = await fetchGet(
-    `${process.env.SERVER}/${postId}/chatting-rooms`,
+    `${process.env.SERVER}/posts/${postId}/chatting-rooms`,
     cookie
   );
 
@@ -24,7 +24,10 @@ export const makeChattingRoom = async (postId: string) => {
     {}
   );
   if (res.status === 400) {
-    throw new Error("이미 존재하는 채팅방");
+    const error = new Error();
+    error.message = "이미 존재하는 채팅방";
+    error.name = "OVERLAPPING";
+    throw error;
   }
   // if (res.status !== 200) {
   //   throw new Error(res.message);
