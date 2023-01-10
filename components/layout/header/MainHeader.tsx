@@ -18,8 +18,8 @@ export default function MainHeader({ title }: MainHeaderProps) {
   };
 
   const logoutHandler = () => {
-    localStorage.removeItem("id");
-    localStorage.removeItem("nickname");
+    sessionStorage.removeItem("id");
+    sessionStorage.removeItem("nickname");
     ctx.onLogout();
     router.push("/");
   };
