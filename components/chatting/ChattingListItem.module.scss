@@ -3,12 +3,14 @@
 .box {
   display: grid;
   grid-template-columns: 1fr 4fr;
+  margin-top: 5px;
   margin-bottom: 15px;
 }
 
 .profile {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
+  border: 1px solid color.$gray;
   border-radius: 50%;
 }
 

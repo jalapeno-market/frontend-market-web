@@ -1,4 +1,5 @@
-@use "../../../styles/color.scss" as color;
+@use "../../../styles/color";
+@use "../../../styles/mixin";
 
 .header-box {
   display: flex;
@@ -21,18 +22,9 @@
 .log-out {
   margin: 10px;
 }
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 100%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translateZ(0);
-  }
-}
 
 .menu {
+  @include mixin.fadeIn-animation(0.7s);
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -41,7 +33,6 @@
   width: 100%;
 
   font-weight: 300;
-  animation: fadeIn 0.7s;
   z-index: 5;
 }
 
