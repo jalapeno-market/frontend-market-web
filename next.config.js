@@ -7,6 +7,7 @@ const nextConfig = {
   swcMinify: true,
   env: {
     SERVER: process.env.HOST,
+    WEBSOCKET: process.env.WEBSOCKET,
   },
 };
 
